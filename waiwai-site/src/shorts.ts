@@ -27,7 +27,7 @@ export default {
         if (request.method === "GET") {
             const url = new URL(request.url);
 
-            if (url.pathname.startsWith("/shorts/set", 0)) {
+            if (url.pathname.startsWith("/shorts/set", 0) || url.pathname.startsWith("/s/set", 0)) {
                 const splitted_path = split_path(url.pathname, "/", 4);
                 if (get_item(splitted_path, -1) && get_item(splitted_path, -2)) {
                     await env.MY_KV_NAMESPACE.put(get_item(splitted_path, -2), get_item(splitted_path, -1));
@@ -45,7 +45,7 @@ export default {
                 }
             }
 
-            if (url.pathname.startsWith("/shorts/remove", 0)) {
+            if (url.pathname.startsWith("/shorts/remove", 0) || url.pathname.startsWith("/s/rm", 0)) {
                 const splitted_path = split_path(url.pathname, "/", 3);
                 if (get_item(splitted_path, -1) && await env.MY_KV_NAMESPACE.get(get_item(splitted_path, -1))) {
                     await env.MY_KV_NAMESPACE.delete(get_item(splitted_path, -1));
@@ -63,7 +63,7 @@ export default {
                 }
             }
 
-            if (url.pathname.startsWith("/shorts", 0)) {
+            if (url.pathname.startsWith("/shorts", 0) || url.pathname.startsWith("/s", 0)) {
                 const splitted_path = split_path(url.pathname, "/", 2);
                 if (get_item(splitted_path, -1)) {
                     if (await env.MY_KV_NAMESPACE.get(get_item(splitted_path, -1))) {
